@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace nothinbutdotnetprep.utility.searching
 {
     public delegate PropertyType PropertyAccessor<ItemToFilter,PropertyType>(ItemToFilter item);
@@ -33,10 +34,14 @@ namespace nothinbutdotnetprep.utility.searching
         {
             return new PredicateCriteria<ItemToFilter>(x => !accessor(x).Equals(propertyValue));
         }
-        /*
-        public PredicateCriteria<ItemToFilter> equal_to_any(PropertyType[] propertyValues)
+       
+        public IEnumerable<PredicateCriteria<ItemToFilter>> equal_to_any(params PropertyType[] propertyValues)
         {
-            return new PredicateCriteria<ItemToFilter>(x =>
+            foreach (var propertyValue in propertyValues)
+            {
+                yield return new PredicateCriteria<ItemToFilter>(x => accessor(x).Equals(propertyValue));
+            }
+            /*return new PredicateCriteria<ItemToFilter>(x =>
             {
                 foreach (var propertyValue in propertyValues)
                 {
@@ -44,8 +49,8 @@ namespace nothinbutdotnetprep.utility.searching
                         break;
                 }
                 
-            });
+            });*/
         }
-         * */
+       
     }
 }
