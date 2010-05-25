@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using nothinbutdotnetprep.utility.searching;
 
 namespace nothinbutdotnetprep.collections
 {
@@ -54,6 +55,13 @@ namespace nothinbutdotnetprep.collections
             if (other == null) return false;
 
             return ReferenceEquals(this, other) || this.title == other.title;
+        }
+
+        public static Criteria<Movie> is_published_after(int year)
+        {
+            return
+                new CriteriaFactory<Movie, int>(new PropertyAccessor<Movie, int>(x => x.date_published.Year)).equal_to(
+                    year);
         }
     }
 
