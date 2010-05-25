@@ -2,11 +2,11 @@ using System;
 
 namespace nothinbutdotnetprep.utility.searching
 {
-    public class PredicateCriteria<T> : Criteria<T>
+    public class FuncCriteria<T> : Criteria<T>
     {
-        Predicate<T> actual_criteria;
+        Func<T,bool> actual_criteria;
 
-        public PredicateCriteria(Predicate<T> actual_criteria)
+        public FuncCriteria(Func<T,bool > actual_criteria)
         {
             this.actual_criteria = actual_criteria;
         }

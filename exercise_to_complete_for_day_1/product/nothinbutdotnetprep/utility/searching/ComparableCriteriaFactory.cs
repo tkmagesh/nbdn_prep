@@ -5,24 +5,24 @@ namespace nothinbutdotnetprep.utility.searching
 {
     public class ComparableCriteriaFactory<ItemToFilter, PropertyType> where PropertyType : IComparable<PropertyType>
     {
-        PointerToAProperty<ItemToFilter, PropertyType> accessor;
+        Func<ItemToFilter, PropertyType> accessor;
 
-        public ComparableCriteriaFactory(PointerToAProperty<ItemToFilter, PropertyType> accessor)
+        public ComparableCriteriaFactory(Func<ItemToFilter, PropertyType> accessor)
         {
             this.accessor = accessor;
         }
 
         public Criteria<ItemToFilter> greater_than(PropertyType property_value)
         {
-            return
-                new PredicateCriteria<ItemToFilter>(x => accessor(x).CompareTo(property_value) > 0);
+            return new PropertyCriteria<ItemToFilter, PropertyType>(x => default(PropertyType),
+                                                                    new GreaterThanCriteria<PropertyType>(property_value));
         }
 
         public Criteria<ItemToFilter> between(PropertyType start, PropertyType end)
         {
-            return
-                new PredicateCriteria<ItemToFilter>(x => 
-                    new InclusiveRange<PropertyType>(start, end).contains(accessor(x)));
+            return new PropertyCriteria<ItemToFilter, PropertyType>(accessor,
+            new FallsInRangeCriteria<PropertyType>(
+                new RangeWithNoUpperBound<PropertyType>()));
         }
     }
 }
