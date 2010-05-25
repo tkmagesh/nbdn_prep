@@ -16,11 +16,6 @@ namespace nothinbutdotnetprep.utility.searching
             return new PredicateCriteria<ItemToFilter>(x => accessor(x).Equals(propertyValue));
         }
 
-        public Criteria<ItemToFilter> not_equal_to(PropertyType propertyValue)
-        {
-            return new NotCriteria<ItemToFilter>(equal_to(propertyValue));
-        }
-
         public Criteria<ItemToFilter> equal_to_any(params PropertyType[] propertyValues)
         {
             return new PredicateCriteria<ItemToFilter>(x =>
