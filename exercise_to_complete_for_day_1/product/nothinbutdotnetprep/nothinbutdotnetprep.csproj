@@ -48,8 +48,10 @@
     <Compile Include="utility\extensions\EnumerableExtensions.cs" />
     <Compile Include="utility\searching\AndCriteria.cs" />
     <Compile Include="utility\searching\BinaryCriteria.cs" />
+    <Compile Include="utility\searching\ComparableCriteriaFactory.cs" />
     <Compile Include="utility\searching\Criteria.cs" />
     <Compile Include="utility\searching\CriteriaExtensions.cs" />
+    <Compile Include="utility\searching\CriteriaFactory.cs" />
     <Compile Include="utility\searching\NotCriteria.cs" />
     <Compile Include="utility\searching\OrCriteria.cs" />
     <Compile Include="utility\searching\PredicateCriteria.cs" />
