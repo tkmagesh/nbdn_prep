@@ -14,7 +14,7 @@ namespace nothinbutdotnetprep.utility.searching
 
         public Criteria<ItemToFilter> greater_than(PropertyType property_value)
         {
-            return new PropertyCriteria<ItemToFilter, PropertyType>(x => default(PropertyType),
+            return new PropertyCriteria<ItemToFilter, PropertyType>(accessor, 
                                                                     new GreaterThanCriteria<PropertyType>(property_value));
         }
 
@@ -22,7 +22,7 @@ namespace nothinbutdotnetprep.utility.searching
         {
             return new PropertyCriteria<ItemToFilter, PropertyType>(accessor,
             new FallsInRangeCriteria<PropertyType>(
-                new RangeWithNoUpperBound<PropertyType>()));
+                new InclusiveRange<PropertyType>(start, end)));
         }
     }
 }
