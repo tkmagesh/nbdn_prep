@@ -165,8 +165,8 @@ namespace nothinbutdotnetprep.specs
 
         Establish c = () =>
         {
-            speed_racer = new Movie { title = "Speed Racer" };
-            another_copy_of_speed_racer = new Movie { title = "Speed Racer" };
+            speed_racer = new Movie {title = "Speed Racer"};
+            another_copy_of_speed_racer = new Movie {title = "Speed Racer"};
             movie_collection.Add(speed_racer);
         };
 
@@ -187,41 +187,42 @@ namespace nothinbutdotnetprep.specs
 
         It should_be_able_to_find_all_movies_published_by_pixar = () =>
         {
-            var results = sut.all_movies().all_items_matching(Where<Movie>.has_a(x => x.production_studio).equal_to(ProductionStudio.Pixar));
+            var results = sut.all_movies().all_items_matching(
+                Where<Movie>.has_a(x => x.production_studio).equal_to(ProductionStudio.Pixar));
 
             results.ShouldContainOnly(cars, a_bugs_life);
         };
 
         It should_be_able_to_find_all_movies_published_by_pixar_or_disney = () =>
         {
-            var criteria = Where<Movie>.has_a(x => x.production_studio).equal_to_any(ProductionStudio.Pixar,
-                                                                                     ProductionStudio.Disney);
-            var results = sut.all_movies().all_items_matching(criteria);
+            var results = sut.all_movies().all_items_matching(
+                Where<Movie>.has_a(x => x.production_studio).equal_to_any(ProductionStudio.Pixar,
+                                                                          ProductionStudio.Disney));
 
             results.ShouldContainOnly(a_bugs_life, pirates_of_the_carribean, cars);
         };
 
         It should_be_able_to_find_all_movies_not_published_by_pixar = () =>
         {
-            var criteria = Where<Movie>.has_a(x => x.production_studio).not_equal_to(ProductionStudio.Pixar);
-
-            var results = sut.all_movies().all_items_matching(Where<Movie>.has_a(x => x.production_studio).not_equal_to(ProductionStudio.Pixar));
+            var results =
+                sut.all_movies().all_items_matching(
+                    Where<Movie>.has_a(x => x.production_studio).not_equal_to(ProductionStudio.Pixar));
 
             results.ShouldNotContain(cars, a_bugs_life);
         };
 
         It should_be_able_to_find_all_movies_published_after_a_certain_year = () =>
         {
-            var results = sut.all_movies().all_items_matching(Movie.is_published_after(2004));
+            var results = sut.all_movies().all_items_matching(
+                Where<Movie>.has_an(x => x.date_published.Year).greater_than(2004));
 
             results.ShouldContainOnly(the_ring, shrek, theres_something_about_mary);
         };
 
         It should_be_able_to_find_all_movies_published_between_a_certain_range_of_years = () =>
         {
-            var results = sut.all_movies().all_items_matching(
-                 new PredicateCriteria<Movie>(x => x.date_published.Year >= 1982 && x.date_published.Year <= 2003));
-
+            var criteria = Where<Movie>.has_an(x => x.date_published.Year).between(1982, 2003);
+            var results = sut.all_movies().all_items_matching(criteria);
             results.ShouldContainOnly(indiana_jones_and_the_temple_of_doom, a_bugs_life, pirates_of_the_carribean);
         };
 
@@ -250,7 +251,7 @@ namespace nothinbutdotnetprep.specs
 
         It should_be_able_to_sort_all_movies_by_title_descending = () =>
         {
-            var results = sut.sort_all_movies_by_title_descending;
+            var results = sut.all_movies().sort_using(Sort<Movie>.by_descending(x => x.title));
 
             results.ShouldContainOnlyInOrder(theres_something_about_mary, the_ring, shrek,
                                              pirates_of_the_carribean, indiana_jones_and_the_temple_of_doom,
@@ -259,7 +260,7 @@ namespace nothinbutdotnetprep.specs
 
         It should_be_able_to_sort_all_movies_by_title_ascending = () =>
         {
-            var results = sut.sort_all_movies_by_title_ascending;
+            var results = sut.all_movies().sort_using(Sort<Movie>.by(x => x.title));
 
             results.ShouldContainOnlyInOrder(a_bugs_life, cars, indiana_jones_and_the_temple_of_doom,
                                              pirates_of_the_carribean, shrek, the_ring,
@@ -268,7 +269,7 @@ namespace nothinbutdotnetprep.specs
 
         It should_be_able_to_sort_all_movies_by_date_published_descending = () =>
         {
-            var results = sut.sort_all_movies_by_date_published_descending();
+            var results = sut.all_movies().sort_using(Sort<Movie>.by_descending(x => x.date_published));
 
             results.ShouldContainOnlyInOrder(theres_something_about_mary, shrek, the_ring, cars,
                                              pirates_of_the_carribean, a_bugs_life,
@@ -277,7 +278,7 @@ namespace nothinbutdotnetprep.specs
 
         It should_be_able_to_sort_all_movies_by_date_published_ascending = () =>
         {
-            var results = sut.sort_all_movies_by_date_published_ascending();
+            var results = sut.all_movies().sort_using(Sort<Movie>.by(x => x.date_published));
 
             results.ShouldContainOnlyInOrder(indiana_jones_and_the_temple_of_doom, a_bugs_life,
                                              pirates_of_the_carribean, cars, the_ring, shrek,
@@ -286,13 +287,22 @@ namespace nothinbutdotnetprep.specs
 
         It should_be_able_to_sort_all_movies_by_studio_rating_and_year_published = () =>
         {
-            //Studio Ratings (highest to lowest)
-            //MGM
-            //Pixar
-            //Dreamworks
-            //Universal
-            //Disney
-            var results = sut.sort_all_movies_by_movie_studio_and_year_published();
+            Studio Ratings (highest to lowest)
+            MGM
+            Pixar
+            Dreamworks
+            Universal
+            Disney
+
+            var results = sut.all_movies().sort_using(Sort<Movie>.by(x => x.production_studio,
+                                                                     ProductionStudio.MGM,
+                                                                     ProductionStudio.Pixar,
+                                                                     ProductionStudio.Dreamworks,
+                                                                     ProductionStudio.Universal,
+                                                                     ProductionStudio.Disney,
+                                                                     ProductionStudio.Paramount)
+                                                          .then_by(x => x.date_published.Year));
+
             /* should return a set of results 
                  * in the collection sorted by the rating of the production studio (not the movie rating) and year published. for this exercise you need to take the studio ratings
                  * into effect, which means that you first have to sort by movie studio (taking the ranking into account) and then by the
