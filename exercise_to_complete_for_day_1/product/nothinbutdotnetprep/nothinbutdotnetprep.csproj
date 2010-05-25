@@ -62,6 +62,7 @@
     <Compile Include="utility\searching\FuncCriteria.cs" />
     <Compile Include="utility\searching\PropertyCriteria.cs" />
     <Compile Include="utility\searching\Where.cs" />
+    <Compile Include="utility\sorting\MovieDateComparer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
