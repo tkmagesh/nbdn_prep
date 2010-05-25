@@ -287,12 +287,12 @@ namespace nothinbutdotnetprep.specs
 
         It should_be_able_to_sort_all_movies_by_studio_rating_and_year_published = () =>
         {
-            //Studio Ratings (highest to lowest)
-            //MGM
-            //Pixar
-            //Dreamworks
-            //Universal
-            //Disney
+            Studio Ratings (highest to lowest)
+            MGM
+            Pixar
+            Dreamworks
+            Universal
+            Disney
 
             var results = sut.all_movies().sort_using(Sort<Movie>.by(x => x.production_studio,
                                                                      ProductionStudio.MGM,
