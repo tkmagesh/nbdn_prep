@@ -11,13 +11,14 @@ namespace nothinbutdotnetprep.utility.extensions
             return items.all_items_matching(criteria.is_satisfied_by);
         }
 
-        public static IEnumerable<T> all_items_matching<T>(this IEnumerable<T> items, IEnumerable<Predicate<T>> criterias)
+        public static IEnumerable<T> all_items_matching<T>(this IEnumerable<T> items, IEnumerable<Criteria<T>> criterias)
         {
             foreach (var criteria in criterias)
             {
                 foreach (var item in items)
                 {
-                    if (criteria(item)) yield return item;
+                    if (criteria.is_satisfied_by(item))
+                        yield return item;
                 }
             }
         }

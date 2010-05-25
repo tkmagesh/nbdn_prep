@@ -34,23 +34,49 @@ namespace nothinbutdotnetprep.utility.searching
         {
             return new PredicateCriteria<ItemToFilter>(x => !accessor(x).Equals(propertyValue));
         }
+
+        public PredicateCriteria<ItemToFilter> equal_to_any(params PropertyType[] propertyValues)
+        {
+            return new PredicateCriteria<ItemToFilter>(x =>
+            {
+                foreach (var propertyValue in propertyValues)
+                {
+                    if (accessor(x).Equals(propertyValue))
+                        return true;
+                }
+                return false;
+            });
+        }
+
+        public PredicateCriteria<ItemToFilter> equal_to_all(params PropertyType[] propertyValues)
+        {
+            return new PredicateCriteria<ItemToFilter>(x =>
+            {
+                foreach (var propertyValue in propertyValues)
+                {
+                    if (!accessor(x).Equals(propertyValue))
+                        return false;
+                }
+                return true;
+            });
+        }
        
-        public IEnumerable<PredicateCriteria<ItemToFilter>> equal_to_any(params PropertyType[] propertyValues)
+       /* public IEnumerable<PredicateCriteria<ItemToFilter>> equal_to_any(params PropertyType[] propertyValues)
         {
             foreach (var propertyValue in propertyValues)
             {
                 yield return new PredicateCriteria<ItemToFilter>(x => accessor(x).Equals(propertyValue));
             }
-            /*return new PredicateCriteria<ItemToFilter>(x =>
-            {
-                foreach (var propertyValue in propertyValues)
-                {
-                    if (accessor(x).Equals(propertyValue))
-                        break;
-                }
+            //return new PredicateCriteria<ItemToFilter>(x =>
+            //{
+            //    foreach (var propertyValue in propertyValues)
+            //    {
+            //        if (accessor(x).Equals(propertyValue))
+            //            break;
+            //    }
                 
-            });*/
-        }
+            //});
+        }*/
        
     }
 }
