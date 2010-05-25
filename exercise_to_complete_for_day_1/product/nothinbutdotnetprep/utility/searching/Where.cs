@@ -61,22 +61,7 @@ namespace nothinbutdotnetprep.utility.searching
             });
         }
        
-       /* public IEnumerable<PredicateCriteria<ItemToFilter>> equal_to_any(params PropertyType[] propertyValues)
-        {
-            foreach (var propertyValue in propertyValues)
-            {
-                yield return new PredicateCriteria<ItemToFilter>(x => accessor(x).Equals(propertyValue));
-            }
-            //return new PredicateCriteria<ItemToFilter>(x =>
-            //{
-            //    foreach (var propertyValue in propertyValues)
-            //    {
-            //        if (accessor(x).Equals(propertyValue))
-            //            break;
-            //    }
-                
-            //});
-        }*/
+     
        
     }
 }
