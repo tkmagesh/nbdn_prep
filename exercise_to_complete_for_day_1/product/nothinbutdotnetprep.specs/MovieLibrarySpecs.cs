@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Machine.Specifications;
 using Machine.Specifications.DevelopWithPassion.Extensions;
 using Machine.Specifications.DevelopWithPassion.Rhino;
@@ -165,8 +166,8 @@ namespace nothinbutdotnetprep.specs
 
         Establish c = () =>
         {
-            speed_racer = new Movie { title = "Speed Racer" };
-            another_copy_of_speed_racer = new Movie { title = "Speed Racer" };
+            speed_racer = new Movie {title = "Speed Racer"};
+            another_copy_of_speed_racer = new Movie {title = "Speed Racer"};
             movie_collection.Add(speed_racer);
         };
 
@@ -187,12 +188,12 @@ namespace nothinbutdotnetprep.specs
 
         It should_be_able_to_find_all_movies_published_by_pixar = () =>
         {
-            var results = sut.all_movies().all_items_matching(Where<Movie>.has_a(x => x.production_studio).equal_to(ProductionStudio.Pixar));
+                var results = sut.all_movies().all_items_matching(Where<Movie>.has_a(x => x.production_studio).equal_to(ProductionStudio.Pixar));
 
             results.ShouldContainOnly(cars, a_bugs_life);
         };
 
-        It should_be_able_to_find_all_movies_published_by_pixar_or_disney = () =>
+       It should_be_able_to_find_all_movies_published_by_pixar_or_disney = () =>
         {
             var criteria = Where<Movie>.has_a(x => x.production_studio).equal_to_any(ProductionStudio.Pixar,
                                                                                      ProductionStudio.Disney);
@@ -204,7 +205,7 @@ namespace nothinbutdotnetprep.specs
         It should_be_able_to_find_all_movies_not_published_by_pixar = () =>
         {
             var criteria = Where<Movie>.has_a(x => x.production_studio).not_equal_to(ProductionStudio.Pixar);
-
+                                                                       
             var results = sut.all_movies().all_items_matching(Where<Movie>.has_a(x => x.production_studio).not_equal_to(ProductionStudio.Pixar));
 
             results.ShouldNotContain(cars, a_bugs_life);
@@ -212,16 +213,17 @@ namespace nothinbutdotnetprep.specs
 
         It should_be_able_to_find_all_movies_published_after_a_certain_year = () =>
         {
-            var results = sut.all_movies().all_items_matching(Movie.is_published_after(2004));
+            var criteria = Where<Movie>.has_an(x => x.date_published.Year).greater_than(2004);
+
+            var results = sut.all_movies().all_items_matching(criteria);
 
             results.ShouldContainOnly(the_ring, shrek, theres_something_about_mary);
         };
 
         It should_be_able_to_find_all_movies_published_between_a_certain_range_of_years = () =>
         {
-            var results = sut.all_movies().all_items_matching(
-                 new PredicateCriteria<Movie>(x => x.date_published.Year >= 1982 && x.date_published.Year <= 2003));
-
+            var criteria = Where<Movie>.has_an(x => x.date_published.Year).between(1982,2003);
+            var results = sut.all_movies().all_items_matching(criteria);
             results.ShouldContainOnly(indiana_jones_and_the_temple_of_doom, a_bugs_life, pirates_of_the_carribean);
         };
 
