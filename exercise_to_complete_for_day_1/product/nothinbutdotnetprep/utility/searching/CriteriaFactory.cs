@@ -11,6 +11,12 @@ namespace nothinbutdotnetprep.utility.searching
             this.accessor = accessor;
         }
 
+        public CriteriaFactory<ItemToFilter, PropertyType> not {
+            get {
+                return new CriteriaFactory<ItemToFilter, PropertyType>(accessor);
+            }
+        }
+
         public Criteria<ItemToFilter> equal_to(PropertyType value)
         {
             return new PropertyCriteria<ItemToFilter, PropertyType>(accessor,
