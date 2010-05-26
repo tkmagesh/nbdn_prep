@@ -53,11 +53,13 @@
     <Compile Include="utility\searching\Criteria.cs" />
     <Compile Include="utility\searching\CriteriaExtensions.cs" />
     <Compile Include="utility\searching\CriteriaFactory.cs" />
+    <Compile Include="utility\searching\DefaultCriteriaFactory.cs" />
     <Compile Include="utility\searching\EqualToAnyCriteria.cs" />
     <Compile Include="utility\searching\EqualToCriteria.cs" />
     <Compile Include="utility\searching\FallsInRangeCriteria.cs" />
     <Compile Include="utility\searching\GreaterThanCriteria.cs" />
     <Compile Include="utility\searching\NotCriteria.cs" />
+    <Compile Include="utility\searching\NotCriteriaFactory.cs" />
     <Compile Include="utility\searching\OrCriteria.cs" />
     <Compile Include="utility\searching\FuncCriteria.cs" />
     <Compile Include="utility\searching\PropertyCriteria.cs" />

@@ -11,10 +11,10 @@ namespace nothinbutdotnetprep.utility.searching
             return new ComparableCriteriaFactory<ItemToFilter, PropertyType>(accessor);
         }
 
-        public static CriteriaFactory<ItemToFilter, PropertyType> has_a<PropertyType>(
+        public static DefaultCriteriaFactory<ItemToFilter, PropertyType> has_a<PropertyType>(
             Func<ItemToFilter, PropertyType> accessor)
         {
-            return new CriteriaFactory<ItemToFilter, PropertyType>(accessor);
+            return new DefaultCriteriaFactory<ItemToFilter, PropertyType>(accessor);
         }
     }
 }
