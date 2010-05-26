@@ -277,6 +277,17 @@ namespace nothinbutdotnetprep.specs
                                              indiana_jones_and_the_temple_of_doom);
         };
 
+        It should_be_able_to_sort_on_multiple_fields = () =>
+        {
+            var results = sut.all_movies().sort_using(Sort<Movie>.by(x => x.title)
+                                                          .then_by(x => x.date_published)
+                                                          .then_by_descending(x => x.rating);
+
+            results.ShouldContainOnlyInOrder(indiana_jones_and_the_temple_of_doom,a_bugs_life,
+                pirates_of_the_carribean,cars,shrek,the_ring,theres_something_about_mary);
+
+        };
+  
         It should_be_able_to_sort_all_movies_by_date_published_ascending = () =>
         {
             var results = sut.all_movies().sort_using(Sort<Movie>.by(x => x.date_published));
@@ -288,12 +299,12 @@ namespace nothinbutdotnetprep.specs
 
         It should_be_able_to_sort_all_movies_by_studio_rating_and_year_published = () =>
         {
-            //Studio Ratings (highest to lowest)
-            //MGM
-            //Pixar
-            //Dreamworks
-            //Universal
-            //Disney
+//            Studio Ratings (highest to lowest)
+//            MGM
+//            Pixar
+//            Dreamworks
+//            Universal
+//            Disney
 
             var results = sut.all_movies().sort_using(Sort<Movie>.by(x => x.production_studio,
                                                                      ProductionStudio.MGM,
@@ -302,7 +313,7 @@ namespace nothinbutdotnetprep.specs
                                                                      ProductionStudio.Universal,
                                                                      ProductionStudio.Disney,
                                                                      ProductionStudio.Paramount)
-                                                          .then_by(x => x.date_published.Year));
+                                                                  .then_by(x => x.date_published.Year));
 
             /* should return a set of results 
                  * in the collection sorted by the rating of the production studio (not the movie rating) and year published. for this exercise you need to take the studio ratings
