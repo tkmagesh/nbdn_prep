@@ -24,5 +24,11 @@ namespace nothinbutdotnetprep.utility.searching
             new FallsInRangeCriteria<PropertyType>(
                 new InclusiveRange<PropertyType>(start, end)));
         }
+
+        public Criteria<ItemToFilter> by(PropertyType property_value)
+        {
+            return new PropertyCriteria<ItemToFilter, PropertyType>(accessor,
+                                                                    new LessThanCriteria<PropertyType>(property_value));
+        }
     }
 }
