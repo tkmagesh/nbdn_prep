@@ -280,8 +280,8 @@ namespace nothinbutdotnetprep.specs
         It should_be_able_to_sort_on_multiple_fields = () =>
         {
             var results = sut.all_movies().sort_using(Sort<Movie>.by(x => x.title)
-                                                          .then_by(x => x.date_published)
-                                                          .then_by_descending(x => x.rating);
+                                                          .then_by(x => x.date_published));
+                                                          //.then_by_descending(x => x.rating));
 
             results.ShouldContainOnlyInOrder(indiana_jones_and_the_temple_of_doom,a_bugs_life,
                 pirates_of_the_carribean,cars,shrek,the_ring,theres_something_about_mary);

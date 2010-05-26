@@ -11,10 +11,9 @@ namespace nothinbutdotnetprep.utility.searching
             this.accessor = accessor;
         }
 
-        public CriteriaFactory<ItemToFilter, PropertyType> not {
-            get {
-                return new CriteriaFactory<ItemToFilter, PropertyType>(accessor);
-            }
+        public NotCriteriaFactory<ItemToFilter, PropertyType> not
+        {
+            get { return new NotCriteriaFactory<ItemToFilter,PropertyType>(accessor); }
         }
 
         public Criteria<ItemToFilter> equal_to(PropertyType value)
@@ -33,5 +32,27 @@ namespace nothinbutdotnetprep.utility.searching
             return new PropertyCriteria<ItemToFilter, PropertyType>(accessor,
                                                                     new EqualToAnyCriteria<PropertyType>(property_values));
         }
+    }
+
+    public class NotCriteriaFactory<ItemToFilter, PropertyType>
+    {
+        readonly Func<ItemToFilter, PropertyType> accessor;
+        
+
+        public NotCriteriaFactory(Func<ItemToFilter, PropertyType> accessor)
+        {
+            this.accessor = accessor;
+        }
+
+        public Criteria<ItemToFilter> equal_to(PropertyType value)
+        {
+            return new PropertyCriteria<ItemToFilter, PropertyType>(accessor,
+                                                                    new NotCriteria<PropertyType>(
+                                                                        new EqualToCriteria<PropertyType>(value)));
+        }
+
+
+
+
     }
 }
