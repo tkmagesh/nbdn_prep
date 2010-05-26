@@ -1,17 +1,19 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using nothinbutdotnetprep.utility.searching;
 
 namespace nothinbutdotnetprep.utility.sorting
 {
-    public static class Sort<T>
+    public static class Sort<ItemToSort>
     {
-        public static IComparer<T> by<PropertyType>(Func<T, PropertyType> accessor) where PropertyType : IComparable<PropertyType>
+        public static IComparer<ItemToSort> by<PropertyType>(Func<ItemToSort, PropertyType> accessor)
+            where PropertyType : IComparable<PropertyType>
         {
-            //return new ComparableCriteriaFactory<T, PropertyType>(accessor);
-            return new ComparableCriteriaFactory<T, PropertyType>(accessor).by(access)
+            return new AnonymousComparer<ItemToSort>((x, y) => accessor(x).CompareTo(accessor(y)));
+        }
+
+        public static IComparer<ItemToSort> by_descending<PropertyType>(Func<ItemToSort, PropertyType> accessor) where PropertyType : IComparable<PropertyType>
+        {
+            return by(accessor).reverse();
         }
     }
-
 }

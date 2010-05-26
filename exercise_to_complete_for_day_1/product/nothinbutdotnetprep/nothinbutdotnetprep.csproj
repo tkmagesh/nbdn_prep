@@ -62,7 +62,9 @@
     <Compile Include="utility\searching\FuncCriteria.cs" />
     <Compile Include="utility\searching\PropertyCriteria.cs" />
     <Compile Include="utility\searching\Where.cs" />
-    <Compile Include="utility\sorting\MovieDateComparer.cs" />
+    <Compile Include="utility\sorting\AnonymousComparer.cs" />
+    <Compile Include="utility\sorting\ComparerExtensions.cs" />
+    <Compile Include="utility\sorting\ReverseComparer.cs" />
     <Compile Include="utility\sorting\Sort.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
