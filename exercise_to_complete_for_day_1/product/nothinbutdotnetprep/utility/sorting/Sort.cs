@@ -5,13 +5,20 @@ namespace nothinbutdotnetprep.utility.sorting
 {
     public static class Sort<ItemToSort>
     {
+        public static IComparer<ItemToSort> by<PropertyType>(Func<ItemToSort, PropertyType> accessor,
+                                                             params PropertyType[] values)
+        {
+            throw new NotImplementedException();
+        }
+
         public static IComparer<ItemToSort> by<PropertyType>(Func<ItemToSort, PropertyType> accessor)
             where PropertyType : IComparable<PropertyType>
         {
-            return new AnonymousComparer<ItemToSort>((x, y) => accessor(x).CompareTo(accessor(y)));
+            return new ComparableComparer<ItemToSort, PropertyType>(accessor);
         }
 
-        public static IComparer<ItemToSort> by_descending<PropertyType>(Func<ItemToSort, PropertyType> accessor) where PropertyType : IComparable<PropertyType>
+        public static IComparer<ItemToSort> by_descending<PropertyType>(Func<ItemToSort, PropertyType> accessor)
+            where PropertyType : IComparable<PropertyType>
         {
             return by(accessor).reverse();
         }
