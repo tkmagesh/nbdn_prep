@@ -3,18 +3,7 @@ using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.utility.sorting
 {
-    public interface ComparerBuilder<T> : IComparer<T>
-    {
-        ComparerBuilder<T> then_by<PropertyType>(Func<T, PropertyType> accessor, params PropertyType[] values);
-
-        ComparerBuilder<T> then_by<PropertyType>(Func<T, PropertyType> accessor)
-            where PropertyType : IComparable<PropertyType>;
-
-        ComparerBuilder<T> then_by_descending<PropertyType>(Func<T, PropertyType> accessor)
-            where PropertyType : IComparable<PropertyType>;
-    }
-
-    public class DefaultComparerBuilder<T> : IComparer<T>, ComparerBuilder<T>
+    public class DefaultComparerBuilder<T> : ComparerBuilder<T>
     {
         IComparer<T> initial_comparer;
 
