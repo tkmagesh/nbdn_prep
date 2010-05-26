@@ -25,17 +25,4 @@ namespace nothinbutdotnetprep.utility.sorting
             return by(accessor).reverse();
         }
     }
-
-    public static class MyExtensions
-    {
-        public static IComparer<ItemToSort> then_by<ItemToSort, PropertyType>(this IComparer<ItemToSort> firstComparer,
-                                                                              Func<ItemToSort, PropertyType> accessor)
-            where PropertyType : IComparable<PropertyType>
-        {
-            /* return new CombinedComparer<ItemToSort>(firstComparer,
-                                                    new ComparableComparer<ItemToSort, PropertyType>(accessor));*/
-
-            return new CombinedComparer<ItemToSort>(firstComparer, Sort<ItemToSort>.by(accessor));
-        }
-    }
 }
