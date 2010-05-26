@@ -8,7 +8,7 @@ namespace nothinbutdotnetprep.utility.sorting
         public static IComparer<ItemToSort> by<PropertyType>(Func<ItemToSort, PropertyType> accessor,
                                                              params PropertyType[] values)
         {
-            throw new NotImplementedException();
+            return new FixedComparer<ItemToSort,PropertyType>(accessor,values);
         }
 
         public static IComparer<ItemToSort> by<PropertyType>(Func<ItemToSort, PropertyType> accessor)
