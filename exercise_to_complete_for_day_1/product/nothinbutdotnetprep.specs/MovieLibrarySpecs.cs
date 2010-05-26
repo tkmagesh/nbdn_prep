@@ -302,7 +302,7 @@ namespace nothinbutdotnetprep.specs
                                                                      ProductionStudio.Universal,
                                                                      ProductionStudio.Disney,
                                                                      ProductionStudio.Paramount)
-                                                          .then_by(x => x.date_published.Year));
+                                                                  .then_by(x => x.date_published.Year));
 
             /* should return a set of results 
                  * in the collection sorted by the rating of the production studio (not the movie rating) and year published. for this exercise you need to take the studio ratings

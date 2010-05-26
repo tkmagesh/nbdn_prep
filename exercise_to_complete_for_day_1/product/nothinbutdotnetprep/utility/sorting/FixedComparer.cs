@@ -16,7 +16,7 @@ namespace nothinbutdotnetprep.utility.sorting
 
         public int Compare(ItemToSort x, ItemToSort y)
         {
-            values.IndexOf(accessor(x)).CompareTo(values.IndexOf(accessor(y)));
+            return values.IndexOf(accessor(x)).CompareTo(values.IndexOf(accessor(y)));
         }
     }
 }
