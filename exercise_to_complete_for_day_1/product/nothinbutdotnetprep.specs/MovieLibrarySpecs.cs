@@ -8,6 +8,7 @@ using nothinbutdotnetprep.collections;
 using nothinbutdotnetprep.tests.utilIty;
 using nothinbutdotnetprep.utility.extensions;
 using nothinbutdotnetprep.utility.searching;
+using nothinbutdotnetprep.utility.sorting;
 
 /* The following set of Contexts (TestFixture) are in place to specify the functionality that you need to complete for the MovieLibrary class.
  * MovieLibrary is an aggregate root for the Movie class. it exposes the ability to search,sort, and iterate over all of the movies that it aggregates.
@@ -206,7 +207,7 @@ namespace nothinbutdotnetprep.specs
         {
             var results =
                 sut.all_movies().all_items_matching(
-                    Where<Movie>.has_a(x => x.production_studio).not_equal_to(ProductionStudio.Pixar));
+                    Where<Movie>.has_a(x => x.production_studio).not.equal_to(ProductionStudio.Pixar));
 
             results.ShouldNotContain(cars, a_bugs_life);
         };
@@ -287,12 +288,12 @@ namespace nothinbutdotnetprep.specs
 
         It should_be_able_to_sort_all_movies_by_studio_rating_and_year_published = () =>
         {
-            Studio Ratings (highest to lowest)
-            MGM
-            Pixar
-            Dreamworks
-            Universal
-            Disney
+            //Studio Ratings (highest to lowest)
+            //MGM
+            //Pixar
+            //Dreamworks
+            //Universal
+            //Disney
 
             var results = sut.all_movies().sort_using(Sort<Movie>.by(x => x.production_studio,
                                                                      ProductionStudio.MGM,

@@ -24,5 +24,6 @@ namespace nothinbutdotnetprep.utility.searching
             new FallsInRangeCriteria<PropertyType>(
                 new InclusiveRange<PropertyType>(start, end)));
         }
+
     }
 }
