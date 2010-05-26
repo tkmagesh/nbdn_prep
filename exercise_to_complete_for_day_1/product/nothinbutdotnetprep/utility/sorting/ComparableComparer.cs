@@ -3,18 +3,12 @@ using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.utility.sorting
 {
-    public class ComparableComparer<ItemToCompare,PropertyType> : IComparer<ItemToCompare> where PropertyType: IComparable<PropertyType>
+    public class ComparableComparer<PropertyType> : IComparer<PropertyType>
+        where PropertyType : IComparable<PropertyType>
     {
-        Func<ItemToCompare, PropertyType> accessor;
-
-        public ComparableComparer(Func<ItemToCompare, PropertyType> accessor)
+        public int Compare(PropertyType x, PropertyType y)
         {
-            this.accessor = accessor;
-        }
-
-        public int Compare(ItemToCompare x, ItemToCompare y)
-        {
-            return accessor(x).CompareTo(accessor(y));
+            return x.CompareTo(y);
         }
     }
 

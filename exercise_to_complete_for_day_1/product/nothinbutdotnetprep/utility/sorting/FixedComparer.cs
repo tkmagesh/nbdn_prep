@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.utility.sorting
 {
-    public class FixedComparer<ItemToSort,PropertyType> :IComparer<ItemToSort>
+    public class FixedComparer<T> : IComparer<T>
     {
-        Func<ItemToSort, PropertyType> accessor;
-        IList<PropertyType> values;
+        IList<T> values;
 
-        public FixedComparer(Func<ItemToSort, PropertyType> accessor, IEnumerable<PropertyType> values)
+        public FixedComparer(IEnumerable<T> values)
         {
-            this.accessor = accessor;
-            this.values = new List<PropertyType>(values);
+            this.values = new List<T>(values);
         }
 
-        public int Compare(ItemToSort x, ItemToSort y)
+        public int Compare(T x, T y)
         {
-            return values.IndexOf(accessor(x)).CompareTo(values.IndexOf(accessor(y)));
+            return values.IndexOf(x).CompareTo(values.IndexOf(y));
         }
     }
 }
