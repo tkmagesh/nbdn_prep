@@ -70,6 +70,7 @@
     <Compile Include="utility\sorting\FixedComparer.cs" />
     <Compile Include="utility\sorting\PropertyComparer.cs" />
     <Compile Include="utility\sorting\ReverseComparer.cs" />
+    <Compile Include="utility\sorting\ComparerBuilder.cs" />
     <Compile Include="utility\sorting\Sort.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
